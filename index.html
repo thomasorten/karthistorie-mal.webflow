@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- This site was created in Webflow. http://www.webflow.com-->
+<!-- Last Published: Wed Apr 20 2016 07:07:49 GMT+0000 (UTC) -->
+<html data-wf-site="5711142cfa7d578851f89c21" data-wf-page="5711142cfa7d578851f89c22" data-wf-domain="%%PUBLISH_URL_REPLACEMENT%%">
+<head>
+  <meta charset="utf-8">
+  <title>Karthistorie mal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Webflow">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/karthistorie-mal.webflow.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico">
+  <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
+</head>
+<body class="body">
+  <div class="w-section full-height-wrapper">
+    <div class="map">
+      <div id="map" class="map"></div>
+      <!-- <div data-widget-latlng="51.511214,-0.119824" data-widget-style="roadmap" data-widget-zoom="12" class="w-widget w-widget-map googlemap"></div> -->
+    </div>
+    <div class="overlay-background">
+      <div class="click-field">
+        <a href="#" class="w-button knapp" onclick="nextPlace()"></a>
+      </div>
+      <div class="info">
+        <h1 class="title">Hovedtittel</h1>
+        <h1 class="subtitle">Her er en stikktittel</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+        <div class="ekstra-info">Litt ekstra info</div>
+      </div>
+      <h1 class="maintitle">Tittel på selve prosjektet</h1>
+    </div>
+    <div class="w-clearfix slider">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle selected"></div>
+      <div class="slider-info">Hovedtittel</div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+<div id="map"></div>
+
+<script>
+// get the viz.json url from the CartoDB Editor
+// - click on visualize
+// - create new visualization
+// - make visualization public
+// - click on publish
+// - go to API tab
+
+  cartodb.createVis('map', 'https://kodingas.cartodb.com/api/v2/viz/47b32112-06d9-11e6-8b6d-0ef24382571b/viz.json')
+  .done(function(vis, layers) {
+    // layer 0 is the base layer, layer 1 is cartodb layer
+    // when setInteraction is disabled featureOver is triggered
+    layers[1].setInteraction(true);
+    layers[1].on('featureOver', function(e, latlng, pos, data, layerNumber) {
+      console.log(e, latlng, pos, data, layerNumber);
+    });
+
+    // you can get the native map to work with it
+    map = vis.getNativeMap();
+
+    // now, perform any operations you need, e.g. assuming map is a L.Map object:
+    //map.setZoom(11);
+    map.panTo([ 67.105175, 11.061387]);
+  });
+
+</script>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script type="text/javascript" src="js/webflow.js"></script>
+  <script>
+
+    var antallKlikk = 0;
+    function nextPlace() {
+
+        antallKlikk = antallKlikk + 1;
+
+        if (antallKlikk == 1) {
+          map.setZoom(11);
+          map.panTo([65.3146, 13.3520]);      
+          $(".title").text("Første punkt");
+          $(".subtitle").text("Her er det skummelt");
+        }
+
+        if (antallKlikk == 2) {
+          map.setZoom(10);
+          map.panTo([64.3146, 12.3520]);      
+          $(".title").text("Andre punkt");
+          $(".subtitle").text("Her er det også skummelt");
+        }
+
+    }
+   
+  </script>
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>
